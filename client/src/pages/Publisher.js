@@ -111,7 +111,6 @@ export default function Publisher() {
 
           <div className="bg-gradient-to-r rounded-lg from-purple-800 to-blue-700 p-2 h-full">
             <div className="rounded-lg bg-white p-2 h-[40rem] w-96">
-              {/* <video className="rounded-lg" autoPlay id="video"></video> */}
             </div>
           </div>
         </div>

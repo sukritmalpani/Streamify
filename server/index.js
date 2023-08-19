@@ -10,8 +10,8 @@ const { body, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const secretKey = process.env.SECRET_KEY
-const createToken = (_id) => {
-    return jwt.sign({ _id }, secretKey, { expiresIn: '3d' })
+const createToken = (_id, isPublisher) => {
+    return jwt.sign({ _id, isPublisher }, secretKey, { expiresIn: '3d' })
 }
 let senderStream;
 mongoDB();
@@ -86,7 +86,7 @@ app.post('/createuser', [
             password: secPassword,
             email: req.body.email
         })
-        const token = createToken(user._id)
+        const token = createToken(user._id, user.isPublisher)
         const email = req.body.email
         res.status(200).json({ name, email, token, success: true })
     } catch (err) {
@@ -113,7 +113,7 @@ app.post('/loginuser', [
         else {
             const check = await bcrypt.compare(req.body.password, user[0].password)
             if (check) {
-                const token = createToken(user[0]._id)
+                const token = createToken(user[0]._id, user[0].isPublisher)
                 const email = user[0].email
                 const name = user[0].name
                 const publisher = user[0].isPublisher

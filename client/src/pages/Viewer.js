@@ -167,22 +167,12 @@ export default function Viewer() {
       <div className="bg-gradient-to-r rounded-lg from-purple-800 to-blue-700 p-2 h-full">
         <div className="flex flex-col justify-end rounded-lg bg-white p-2 h-[40rem] w-96">
           <div className="flex justify-center">chats</div>
-          {/* <hr /> */}
           <div className="flex">
-            {/* <input
-              type="text"
-              id="first_name"
-              className="bg-gray-50 border m-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="John"
-              required
-            /><input type="submit"/> */}
-            {/* <input class="appearance-none border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Jane Doe" aria-label="Full name"/> */}
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-3 m-1 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Type your messages here..." />
-            <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-md border-4 text-white py-1 px-2 rounded" type="button">
+            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-3 m-1 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Type your messages here..." />
+            <button className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-md border-4 text-white py-1 px-2 rounded" type="button">
               <AiOutlineSend />
             </button>
           </div>
-          {/* <video className="rounded-lg" autoPlay id="video"></video> */}
         </div>
       </div>
     </div>
