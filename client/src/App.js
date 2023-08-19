@@ -13,6 +13,7 @@ import { Navigate } from 'react-router-dom';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuthContext } from './hooks/useAuthContext';
+import Dashboard from './dash/Dashboard';
 export default function App() {
   const { user } = useAuthContext();
   return (
@@ -21,6 +22,8 @@ export default function App() {
         <Routes>
 {/* <<<<<<< Updated upstream */}
           <Route path="/" element={<Home />} />
+          <Route path="/dash" element={<Dashboard />} />
+
           <Route path='/publisher' element={user?.publisher ? <Publisher /> : <Login message="You need to login first" />} />
           <Route path="/viewer" element={user ? <Viewer /> : <Login message="You need to login first" />} />
           <Route path="/login" element={user ? <Navigate to='/' /> : <Login />} />
