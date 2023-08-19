@@ -6,10 +6,19 @@ const webrtc = require("wrtc");
 
 let senderStream;
 app.use(cors());
+// app.use((req, res, next) => {
+//     res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000")
+//     res.header(
+//         "Access-Control-Allow-Headers",
+//         "Origin,X-Requested-With,Content-Type,Accept"
+//     );
+//     next();
+// })
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+// app.use('/api', require('./Routes/CreateUser'))
+// app.use('/api', require('./Routes/LoginUser'))
 app.post("/consumer", async ({ body }, res) => {
     const peer = new webrtc.RTCPeerConnection({
         iceServers: [
