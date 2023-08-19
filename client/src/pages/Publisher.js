@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { FaPlay, FaPause } from "react-icons/fa";
 
+
 export default function Publisher() {
   const [stream, setStream] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
@@ -82,11 +83,13 @@ export default function Publisher() {
               className="mt-4 h-10 w-32 flex flex-row justify-around items-center ml-15 mr-20 bg-[#F9AB40] hover:bg-[#c0392b] hover:scale-110 duration-300  text-white py-2 px-4 rounded-full"
               onClick={togglePause}
             >
-              <FaPause />
+              {isPaused ? <FaPlay />:<FaPause />}
               {isPaused ? "Resume" : "Pause"}
             </button>
           </div>
         </div>
+
+
 
         <div className="bg-gradient-to-r rounded-lg from-purple-800 to-blue-700 p-2 h-full">
           <div className="rounded-lg bg-white p-2 h-[40rem] w-96">
