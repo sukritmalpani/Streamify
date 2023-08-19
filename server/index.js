@@ -36,7 +36,7 @@ app.post("/consumer", async ({ body }, res) => {
         const payload = {
             sdp: peer.localDescription
         }
-
+        console.log("OK");
         res.json(payload);
     } catch (err) {
         res.json({ message: "Currently there are no Live Streams" })
@@ -52,6 +52,7 @@ app.post('/broadcast', async ({ body }, res) => {
             }
         ]
     });
+    // console.log(peer);
     peer.ontrack = (e) => handleTrackEvent(e, peer);
     const desc = new webrtc.RTCSessionDescription(body.sdp);
     await peer.setRemoteDescription(desc);
@@ -60,7 +61,7 @@ app.post('/broadcast', async ({ body }, res) => {
     const payload = {
         sdp: peer.localDescription
     }
-
+    console.log(payload);
     res.json(payload);
 });
 
