@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { FaPlay, FaPause } from "react-icons/fa";
 
 export default function Publisher() {
   const [stream, setStream] = useState(null);
@@ -67,20 +68,24 @@ export default function Publisher() {
           <div className="rounded-lg bg-white p-2">
             <video className="rounded-lg w-full" autoPlay id="video"></video>
           </div>
-          <button
-            className="mt-4 ml-20 mr-20 bg-[#FFB001] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-            id="my-button"
-            onClick={init}
-          >
-            Start
-          </button>
-          <button
-            id="pause-button"
-            className="mt-4 ml-15 mr-20 bg-[#F9AB40] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-            onClick={togglePause}
-          >
-            {isPaused ? "Resume" : "Pause"}
-          </button>
+          <div className="flex ">
+            <button
+              className="mt-4 h-10 w-32 flex flex-row justify-around items-center ml-20 mr-20 bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white py-2 px-4 rounded-full"
+              id="my-button"
+              onClick={init}
+            >
+              <FaPlay />
+              Start
+            </button>
+            <button
+              id="pause-button"
+              className="mt-4 h-10 w-32 flex flex-row justify-around items-center ml-15 mr-20 bg-[#F9AB40] hover:bg-[#c0392b] hover:scale-110 duration-300  text-white py-2 px-4 rounded-full"
+              onClick={togglePause}
+            >
+              <FaPause />
+              {isPaused ? "Resume" : "Pause"}
+            </button>
+          </div>
         </div>
 
         <div className="bg-gradient-to-r rounded-lg from-purple-800 to-blue-700 p-2 h-full">

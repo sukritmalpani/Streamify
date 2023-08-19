@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.3",
+    "@vidstack/react": "^0.6.13",
+    "react-icons": "^4.10.1",
+    "vidstack": "^0.6.13"
+  }
+}
