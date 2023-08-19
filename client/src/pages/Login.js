@@ -20,7 +20,7 @@ export default function Login() {
     return (
         <div>
             <Navbar />
-            <main className="w-full h-screen flex flex-col items-center justify-center px-4">
+            <main className="w-full h-screen flex flex-col bg-white items-center justify-center px-4">
                 {/* {state &&
                     (<div>
                         {state.data}

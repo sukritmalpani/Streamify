@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaPlay, FaPause } from "react-icons/fa";
 import Navbar from "../components/Navbar";
@@ -11,6 +11,7 @@ export default function Publisher() {
   const [stream, setStream] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [started, setStarted] = useState(false);
   async function init() {
     setLoading(true);
     setTimeout(async () => {
@@ -24,11 +25,11 @@ export default function Publisher() {
       const peer = createPeer();
       mediaStream.getTracks().forEach((track) => peer.addTrack(track, mediaStream));
       setLoading(false);
+      setStarted(true);
       toast.success("You are live now");
+      setIsPaused(false);
     }, 5000);
   }
-
-
   function createPeer() {
     const peer = new RTCPeerConnection({
       iceServers: [
@@ -79,25 +80,28 @@ export default function Publisher() {
           <div className=" bg-gradient-to-r m-5 rounded-lg from-purple-800 to-blue-700 p-4 w-6/12 h-full">
             <div className="rounded-lg bg-white p-2">
               <video className="rounded-lg w-full" autoPlay id="video"></video>
-              {loading && <><LinearProgress />Starting Your Stream</>}
+              {loading && <><LinearProgress /> {started ? "Restarting Your Stream" : "Starting Your Stream"}</>}
             </div>
             <div className="flex ">
               <button
+                disabled={loading}
                 className="mt-4 h-10 w-32 flex flex-row justify-around items-center ml-20 mr-20 bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white py-2 px-4 rounded-full"
                 id="my-button"
                 onClick={init}
               >
                 <FaPlay />
-                Start
+                {started ? "Restart" : "Start"}
               </button>
-              <button
-                id="pause-button"
-                className="mt-4 h-10 w-32 flex flex-row justify-around items-center ml-15 mr-20 bg-[#F9AB40] hover:bg-[#c0392b] hover:scale-110 duration-300  text-white py-2 px-4 rounded-full"
-                onClick={togglePause}
-              >
-                {isPaused ? <FaPlay /> : <FaPause />}
-                {isPaused ? "Resume" : "Pause"}
-              </button>
+              {started &&
+                <button
+                  id="pause-button"
+                  className="mt-4 h-10 w-32 flex flex-row justify-around items-center ml-15 mr-20 bg-[#F9AB40] hover:bg-[#c0392b] hover:scale-110 duration-300  text-white py-2 px-4 rounded-full"
+                  onClick={togglePause}
+                >
+                  {isPaused ? <FaPlay /> : <FaPause />}
+                  {isPaused ? "Resume" : "Pause"}
+                </button>
+              }
             </div>
           </div>
 

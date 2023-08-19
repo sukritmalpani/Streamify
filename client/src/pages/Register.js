@@ -22,7 +22,7 @@ export default function Register() {
     return (
         <div>
             <Navbar />
-            <main className="w-full flex">
+            <main className="w-full flex bg-white">
                 <div className="relative flex-1 hidden items-center justify-center h-screen bg-gray-900 lg:flex">
                     <div className="relative z-10 w-full max-w-md">
                         <img src="https://floatui.com/logo-dark.svg" width={150} />
