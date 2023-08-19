@@ -1,8 +1,9 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import {FaVolumeUp} from "react-icons/fa"
-import { FaPlay, FaPause,FaEye } from "react-icons/fa";
-import {BsArrowsFullscreen} from "react-icons/bs";
+import { FaVolumeUp } from "react-icons/fa";
+import { FaPlay, FaPause, FaEye } from "react-icons/fa";
+import { BsArrowsFullscreen } from "react-icons/bs";
+import {AiOutlineSend} from "react-icons/ai";
 
 export default function Viewer() {
   const [paused, setPaused] = useState(false);
@@ -124,7 +125,8 @@ export default function Viewer() {
             className="h-10 w-36 m-2 flex flex-row justify-around items-center  bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white py-2 px-4 rounded-full"
             id="my-button"
             onClick={init}
-          ><FaEye/>
+          >
+            <FaEye />
             View Stream
           </button>
           <button
@@ -132,17 +134,18 @@ export default function Viewer() {
              m-2 p-3 flex flex-row justify-around items-center  bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white py-2 px-4 rounded-full"
             onClick={togglePause}
           >
-            {paused ? <FaPlay />:<FaPause />}
+            {paused ? <FaPlay /> : <FaPause />}
             {paused ? "Resume" : "Pause"}
           </button>
           <button
             className=" h-10 w-36 p-3 m-2 flex flex-row justify-around items-center  bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white rounded-full"
             onClick={enterFullScreen}
-          ><BsArrowsFullscreen/>
+          >
+            <BsArrowsFullscreen />
             Full Screen
           </button>
           <div className="flex justify-around items-center ml-10 ">
-          <FaVolumeUp/>
+            <FaVolumeUp />
             <input
               type="range"
               min="0"
@@ -150,16 +153,32 @@ export default function Viewer() {
               step="0.01"
               value={volume}
               onChange={handleVolumeChange}
-            className="m-2 range range-xs range-error"
+              className="m-2 range range-xs range-error"
             />
           </div>
         </div>
       </div>
       <div className="bg-gradient-to-r rounded-lg from-purple-800 to-blue-700 p-2 h-full">
-          <div className="rounded-lg bg-white p-2 h-[40rem] w-96">
-            {/* <video className="rounded-lg" autoPlay id="video"></video> */}
+        <div className="flex flex-col justify-end rounded-lg bg-white p-2 h-[40rem] w-96">
+          <div className="flex justify-center">chats</div>
+          {/* <hr /> */}
+          <div className="flex">
+            {/* <input
+              type="text"
+              id="first_name"
+              className="bg-gray-50 border m-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="John"
+              required
+            /><input type="submit"/> */}
+            {/* <input class="appearance-none border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Jane Doe" aria-label="Full name"/> */}
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-3 m-1 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Type your messages here..."/>
+    <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-md border-4 text-white py-1 px-2 rounded" type="button">
+      <AiOutlineSend/>
+    </button>
           </div>
+          {/* <video className="rounded-lg" autoPlay id="video"></video> */}
         </div>
+      </div>
     </div>
   );
 }
