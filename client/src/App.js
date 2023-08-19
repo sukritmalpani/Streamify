@@ -9,6 +9,8 @@ import Register from './pages/Register';
 import Page404 from './pages/Page404';
 import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home';
+
+import 'react-toastify/dist/ReactToastify.css';
 export default function App() {
   return (
     <div>

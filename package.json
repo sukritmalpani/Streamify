@@ -5,6 +5,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.3",
     "@vidstack/react": "^0.6.13",
+    "daisyui": "^3.5.1",
     "react-html5video": "^2.5.1",
     "react-icons": "^4.10.1",
     "react-toastify": "^9.1.3",
