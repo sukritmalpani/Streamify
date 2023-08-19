@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import {FaVolumeUp} from "react-icons/fa"
+import { FaPlay, FaPause,FaEye } from "react-icons/fa";
+import {BsArrowsFullscreen} from "react-icons/bs";
 
 export default function Viewer() {
   const [paused, setPaused] = useState(false);
@@ -103,7 +105,7 @@ export default function Viewer() {
   };
 
   return (
-    <div className="flex  bg-[#44455B] min-h-screen flex-row justify-center items-center h-full ">
+    <div className="flex  bg-[#44455B] min-h-screen flex-row justify-around items-center h-full ">
       <div className=" bg-gradient-to-r m-5 rounded-lg from-purple-800 to-blue-400 p-4 w-6/12 h-full">
         <div className="rounded-lg bg-white p-2" ref={videoContainerRef}>
           <video
@@ -119,22 +121,24 @@ export default function Viewer() {
         <div className="flex p-2">
           <audio ref={audioRef} autoPlay id="audio"></audio>
           <button
-            className="h-10 w-32 m-2 flex flex-row justify-around items-center  bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white py-2 px-4 rounded-full"
+            className="h-10 w-36 m-2 flex flex-row justify-around items-center  bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white py-2 px-4 rounded-full"
             id="my-button"
             onClick={init}
-          >
+          ><FaEye/>
             View Stream
           </button>
           <button
-            className="h-10 w-40 m-2 flex flex-row justify-around items-center  bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white py-2 px-4 rounded-full"
+            className="h-10 w-32
+             m-2 p-3 flex flex-row justify-around items-center  bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white py-2 px-4 rounded-full"
             onClick={togglePause}
           >
+            {paused ? <FaPlay />:<FaPause />}
             {paused ? "Resume" : "Pause"}
           </button>
           <button
-            className=" h-10 w-40 m-2 flex flex-row justify-around items-center  bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white rounded-full"
+            className=" h-10 w-36 p-3 m-2 flex flex-row justify-around items-center  bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white rounded-full"
             onClick={enterFullScreen}
-          >
+          ><BsArrowsFullscreen/>
             Full Screen
           </button>
           <div className="flex justify-around items-center ml-10 ">
