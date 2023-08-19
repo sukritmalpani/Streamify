@@ -3,25 +3,31 @@ import axios from "axios";
 import { FaPlay, FaPause } from "react-icons/fa";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { CircularProgress, LinearProgress } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
 
 
 export default function Publisher() {
   const [stream, setStream] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   async function init() {
-    console.log("OK");
-    const mediaStream = await navigator.mediaDevices.getUserMedia({
-      video: true,
-      audio: true,
-    });
-    setStream(mediaStream);
-    document.getElementById("video").srcObject = mediaStream;
-    const peer = createPeer();
-    mediaStream
-      .getTracks()
-      .forEach((track) => peer.addTrack(track, mediaStream));
+    setLoading(true);
+    setTimeout(async () => {
+      console.log("OK");
+      const mediaStream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true,
+      });
+      setStream(mediaStream);
+      document.getElementById("video").srcObject = mediaStream;
+      const peer = createPeer();
+      mediaStream.getTracks().forEach((track) => peer.addTrack(track, mediaStream));
+      setLoading(false);
+      toast.success("You are live now");
+    }, 5000);
   }
+
 
   function createPeer() {
     const peer = new RTCPeerConnection({
@@ -42,6 +48,7 @@ export default function Publisher() {
       sdp: peer.localDescription,
     };
     console.log("Here");
+
     const { data } = await axios.post(
       "http://localhost:5000/broadcast",
       payload
@@ -72,6 +79,7 @@ export default function Publisher() {
           <div className=" bg-gradient-to-r m-5 rounded-lg from-purple-800 to-blue-700 p-4 w-6/12 h-full">
             <div className="rounded-lg bg-white p-2">
               <video className="rounded-lg w-full" autoPlay id="video"></video>
+              {loading && <><LinearProgress />Starting Your Stream</>}
             </div>
             <div className="flex ">
               <button
@@ -102,6 +110,7 @@ export default function Publisher() {
           </div>
         </div>
       </div>
+      <ToastContainer />
       <Footer />
     </div>
   );

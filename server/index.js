@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoDB = require('./db')
@@ -8,8 +9,9 @@ const User = require('./models/Users')
 const { body, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const secretKey = process.env.SECRET_KEY
 const createToken = (_id) => {
-    return jwt.sign({ _id }, "konso840kmn*72nddj11", { expiresIn: '3d' })
+    return jwt.sign({ _id }, secretKey, { expiresIn: '3d' })
 }
 let senderStream;
 mongoDB();

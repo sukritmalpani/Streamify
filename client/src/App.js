@@ -8,9 +8,13 @@ import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Page404 from './pages/Page404';
+<<<<<<< Updated upstream
 // =======
 
 // >>>>>>> Stashed changes
+=======
+import 'react-toastify/dist/ReactToastify.css';
+>>>>>>> Stashed changes
 export default function App() {
   return (
     <div>

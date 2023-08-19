@@ -7,7 +7,7 @@ import { useLogin } from '../hooks/useLogin';
 export default function Login() {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const { login, error, isLoading } = useLogin();
-    const { state } = useLocation();
+    // const { state } = useLocation();
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -21,10 +21,10 @@ export default function Login() {
         <div>
             <Navbar />
             <main className="w-full h-screen flex flex-col items-center justify-center px-4">
-                {state &&
+                {/* {state &&
                     (<div>
                         {state.data}
-                    </div>)}
+                    </div>)} */}
                 <div className="max-w-sm w-full text-gray-600">
                     <div className="text-center">
                         <img src="https://floatui.com/logo.svg" width={150} className="mx-auto" />
