@@ -16,7 +16,10 @@ const UserSchema = new Schema({
         required: true,
         unique: false
     },
-    isPublisher
+    isPublisher: {
+        type: Boolean,
+        default: false
+    }
 })
 const User = mongoose.model('User', UserSchema);
 module.exports = User

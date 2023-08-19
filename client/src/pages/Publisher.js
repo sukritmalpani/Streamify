@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { FaPlay, FaPause } from "react-icons/fa";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 
 export default function Publisher() {
@@ -63,40 +65,44 @@ export default function Publisher() {
   }
 
   return (
-    <div className="flex  bg-[#44455B] flex-row min-h-screen justify-center items-center h-full">
-      <div className="flex rounded-lg p-5 flex-row min-h-screen min-w-full justify-around items-center h-full">
-        <div className=" bg-gradient-to-r m-5 rounded-lg from-purple-800 to-blue-700 p-4 w-6/12 h-full">
-          <div className="rounded-lg bg-white p-2">
-            <video className="rounded-lg w-full" autoPlay id="video"></video>
+    <div>
+      <Navbar />
+      <div className="flex  bg-[#44455B] flex-row min-h-screen justify-center items-center h-full">
+        <div className="flex rounded-lg p-5 flex-row min-h-screen min-w-full justify-around items-center h-full">
+          <div className=" bg-gradient-to-r m-5 rounded-lg from-purple-800 to-blue-700 p-4 w-6/12 h-full">
+            <div className="rounded-lg bg-white p-2">
+              <video className="rounded-lg w-full" autoPlay id="video"></video>
+            </div>
+            <div className="flex ">
+              <button
+                className="mt-4 h-10 w-32 flex flex-row justify-around items-center ml-20 mr-20 bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white py-2 px-4 rounded-full"
+                id="my-button"
+                onClick={init}
+              >
+                <FaPlay />
+                Start
+              </button>
+              <button
+                id="pause-button"
+                className="mt-4 h-10 w-32 flex flex-row justify-around items-center ml-15 mr-20 bg-[#F9AB40] hover:bg-[#c0392b] hover:scale-110 duration-300  text-white py-2 px-4 rounded-full"
+                onClick={togglePause}
+              >
+                {isPaused ? <FaPlay /> : <FaPause />}
+                {isPaused ? "Resume" : "Pause"}
+              </button>
+            </div>
           </div>
-          <div className="flex ">
-            <button
-              className="mt-4 h-10 w-32 flex flex-row justify-around items-center ml-20 mr-20 bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white py-2 px-4 rounded-full"
-              id="my-button"
-              onClick={init}
-            >
-              <FaPlay />
-              Start
-            </button>
-            <button
-              id="pause-button"
-              className="mt-4 h-10 w-32 flex flex-row justify-around items-center ml-15 mr-20 bg-[#F9AB40] hover:bg-[#c0392b] hover:scale-110 duration-300  text-white py-2 px-4 rounded-full"
-              onClick={togglePause}
-            >
-              {isPaused ? <FaPlay />:<FaPause />}
-              {isPaused ? "Resume" : "Pause"}
-            </button>
-          </div>
-        </div>
 
 
 
-        <div className="bg-gradient-to-r rounded-lg from-purple-800 to-blue-700 p-2 h-full">
-          <div className="rounded-lg bg-white p-2 h-[40rem] w-96">
-            {/* <video className="rounded-lg" autoPlay id="video"></video> */}
+          <div className="bg-gradient-to-r rounded-lg from-purple-800 to-blue-700 p-2 h-full">
+            <div className="rounded-lg bg-white p-2 h-[40rem] w-96">
+              {/* <video className="rounded-lg" autoPlay id="video"></video> */}
+            </div>
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
