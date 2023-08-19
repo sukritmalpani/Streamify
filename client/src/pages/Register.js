@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSignup } from '../hooks/useSignup';
 export default function Register() {
     const navigate = useNavigate();
@@ -58,7 +58,7 @@ export default function Register() {
                             <img src="https://floatui.com/logo.svg" width={150} className="lg:hidden" />
                             <div className="mt-5 space-y-2">
                                 <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">Sign up</h3>
-                                <p className="">Already have an account? <a href="javascript:void(0)" className="font-medium text-indigo-600 hover:text-indigo-500">Log in</a></p>
+                                <p className="">Already have an account? <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">Log in</Link></p>
                             </div>
                         </div>
                         <div className="grid grid-cols-3 gap-x-3">

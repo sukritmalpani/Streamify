@@ -20,23 +20,27 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/consumer", async ({ body }, res) => {
-    const peer = new webrtc.RTCPeerConnection({
-        iceServers: [
-            {
-                urls: "stun:stun.stunprotocol.org"
-            }
-        ]
-    });
-    const desc = new webrtc.RTCSessionDescription(body.sdp);
-    await peer.setRemoteDescription(desc);
-    senderStream.getTracks().forEach(track => peer.addTrack(track, senderStream));
-    const answer = await peer.createAnswer();
-    await peer.setLocalDescription(answer);
-    const payload = {
-        sdp: peer.localDescription
-    }
+    try {
+        const peer = new webrtc.RTCPeerConnection({
+            iceServers: [
+                {
+                    urls: "stun:stun.stunprotocol.org"
+                }
+            ]
+        });
+        const desc = new webrtc.RTCSessionDescription(body.sdp);
+        await peer.setRemoteDescription(desc);
+        senderStream.getTracks().forEach(track => peer.addTrack(track, senderStream));
+        const answer = await peer.createAnswer();
+        await peer.setLocalDescription(answer);
+        const payload = {
+            sdp: peer.localDescription
+        }
 
-    res.json(payload);
+        res.json(payload);
+    } catch (err) {
+        res.json({ message: "Currently there are no Live Streams" })
+    }
 });
 
 app.post('/broadcast', async ({ body }, res) => {
@@ -73,6 +77,7 @@ app.post('/createuser', [
         return res.status(400).json({ errors: errors.array() })
     }
     const email = req.body.email
+    const name = req.body.name
     const salt = await bcrypt.genSalt(10)
     let secPassword = await bcrypt.hash(req.body.password, salt)
     try {
@@ -83,7 +88,7 @@ app.post('/createuser', [
         })
         const token = createToken(user._id)
         const email = req.body.email
-        res.status(200).json({ email, token, success: true })
+        res.status(200).json({ name, email, token, success: true })
     } catch (err) {
         console.log(err)
         res.status(400).json({ success: false })
@@ -110,7 +115,9 @@ app.post('/loginuser', [
             if (check) {
                 const token = createToken(user[0]._id)
                 const email = user[0].email
-                res.status(200).json({ email, token, success: true })
+                const name = user[0].name
+                const publisher = user[0].isPublisher
+                res.status(200).json({ name, publisher, email, token, success: true })
             }
             else {
                 res.status(400).json({ message: "Incorrect Password", success: false })

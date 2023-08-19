@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { CircularProgress, LinearProgress } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 
 export default function Publisher() {
@@ -12,6 +13,7 @@ export default function Publisher() {
   const [isPaused, setIsPaused] = useState(false);
   const [loading, setLoading] = useState(false);
   const [started, setStarted] = useState(false);
+  const { user } = useAuthContext();
   async function init() {
     setLoading(true);
     setTimeout(async () => {

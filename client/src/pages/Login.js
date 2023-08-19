@@ -4,10 +4,10 @@ import Navbar from '../components/Navbar';
 import { Footer } from 'flowbite-react';
 import { useAuth } from '../utils/AuthContext';
 import { useLogin } from '../hooks/useLogin';
-export default function Login() {
+export default function Login(props) {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const { login, error, isLoading } = useLogin();
-    // const { state } = useLocation();
+    const { message } = props;
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -21,10 +21,7 @@ export default function Login() {
         <div>
             <Navbar />
             <main className="w-full h-screen flex flex-col bg-white items-center justify-center px-4">
-                {/* {state &&
-                    (<div>
-                        {state.data}
-                    </div>)} */}
+                {message && <span>{message}</span>}
                 <div className="max-w-sm w-full text-gray-600">
                     <div className="text-center">
                         <img src="https://floatui.com/logo.svg" width={150} className="mx-auto" />

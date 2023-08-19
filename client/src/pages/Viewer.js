@@ -3,7 +3,8 @@ import axios from "axios";
 import { FaVolumeUp } from "react-icons/fa";
 import { FaPlay, FaPause, FaEye } from "react-icons/fa";
 import { BsArrowsFullscreen } from "react-icons/bs";
-import {AiOutlineSend} from "react-icons/ai";
+import { AiOutlineSend } from "react-icons/ai";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Viewer() {
   const [paused, setPaused] = useState(false);
@@ -12,7 +13,7 @@ export default function Viewer() {
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.5);
   const [muted, setMuted] = useState(false);
-
+  const [error, setError] = useState(null);
   const videoRef = useRef(null);
   const audioRef = useRef(null);
   const videoContainerRef = useRef(null);
@@ -49,6 +50,10 @@ export default function Viewer() {
       "http://localhost:5000/consumer",
       payload
     );
+    if (data?.message) {
+      setError(data.message);
+      toast.error(data.message);
+    }
     const desc = new RTCSessionDescription(data.sdp);
     peer.setRemoteDescription(desc).catch((e) => console.log(e));
   }
@@ -107,6 +112,7 @@ export default function Viewer() {
 
   return (
     <div className="flex  bg-[#44455B] min-h-screen flex-row justify-around items-center h-full ">
+      <ToastContainer />
       <div className=" bg-gradient-to-r m-5 rounded-lg from-purple-800 to-blue-400 p-4 w-6/12 h-full">
         <div className="rounded-lg bg-white p-2" ref={videoContainerRef}>
           <video
@@ -171,10 +177,10 @@ export default function Viewer() {
               required
             /><input type="submit"/> */}
             {/* <input class="appearance-none border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Jane Doe" aria-label="Full name"/> */}
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-3 m-1 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Type your messages here..."/>
-    <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-md border-4 text-white py-1 px-2 rounded" type="button">
-      <AiOutlineSend/>
-    </button>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-3 m-1 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Type your messages here..." />
+            <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-md border-4 text-white py-1 px-2 rounded" type="button">
+              <AiOutlineSend />
+            </button>
           </div>
           {/* <video className="rounded-lg" autoPlay id="video"></video> */}
         </div>

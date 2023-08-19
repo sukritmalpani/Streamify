@@ -1,5 +1,6 @@
 import React from 'react'
-
+// {user && <Link></Link>}
+//                         </Link>Link to='/publisher'><button>Publisher</but
 export default function Footer() {
     const footerNavs = [
         {
