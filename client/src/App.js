@@ -19,11 +19,19 @@ export default function App() {
     <div>
       <BrowserRouter>
         <Routes>
+{/* <<<<<<< Updated upstream */}
           <Route path="/" element={<Home />} />
           <Route path='/publisher' element={user?.publisher ? <Publisher /> : <Login message="You need to login first" />} />
           <Route path="/viewer" element={user ? <Viewer /> : <Login message="You need to login first" />} />
           <Route path="/login" element={user ? <Navigate to='/' /> : <Login />} />
           <Route path="/register" element={user ? <Navigate to='/' /> : <Register />} />
+=======
+          <Route path="/test" element={<Home />} />
+          <Route path='/publisher' element={<Publisher />} />
+          <Route path="/viewer" element={<Viewer />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+{/* >>>>>>> Stashed changes */}
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
