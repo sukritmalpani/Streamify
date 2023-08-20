@@ -190,60 +190,44 @@ export default function Viewer() {
           <button
             className="h-10 w-32
              m-2 p-3 flex flex-row justify-around items-center  bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white py-2 px-4 rounded-full"
-            onClick={togglePause}
-          >
-            {paused ? <FaPlay /> : <FaPause />}
-            {paused ? "Resume" : "Pause"}
-          </button>
-          <button
-            className=" h-10 w-36 p-3 m-2 flex flex-row justify-around items-center  bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white rounded-full"
-            onClick={enterFullScreen}
-          >
-            <BsArrowsFullscreen />
-            Full Screen
-          </button>
-          <div className="flex justify-around items-center ml-10 ">
-            <FaVolumeUp />
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={volume}
-              onChange={handleVolumeChange}
-              className="m-2 range range-xs range-error"
-            />
+              onClick={togglePause}
+            >
+              {paused ? <FaPlay /> : <FaPause />}
+              {paused ? "Resume" : "Pause"}
+            </button>
+            <button
+              className=" h-10 w-36 p-3 m-2 flex flex-row justify-around items-center  bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white rounded-full"
+              onClick={enterFullScreen}
+            >
+              <BsArrowsFullscreen />
+              Full Screen
+            </button>
+            <div className="flex justify-around items-center ml-10 ">
+              <FaVolumeUp />
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={volume}
+                onChange={handleVolumeChange}
+                className="m-2 range range-xs range-error"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="bg-gradient-to-r rounded-lg from-purple-800 to-blue-700 p-2 h-full">
-        <div className="flex flex-col justify-between rounded-lg bg-white p-2 h-[40rem] w-96">
-          {/* in above div justify-end was changed to justify-between */}
-          <div style={{ height: "34rem", overflowY: "auto" }}>
-            {/* above is the div inside which our chats are displayed */}
-            {
-              messages.map((item, index) => {
-                return (
-                  <div key={index} style={{ padding: "3px 5px", fontWeight: "600", fontSize: "medium" }}>{item}</div>
-                )
-              })
-            }
-          </div>
-          <div >
-            {/* above is the div inside which chats div is there and input field and send button is there  */}
-            <div className="flex" style={{ marginLeft: "10px" }}>chats</div>
-            <div className="flex" > 
-            {/* above is the flex container for the input box and send button */}
-              <form action="" className='send-container flex' onSubmit={(e) => handleSubmit(e)} >
-                <input ref={inputRef} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-3 m-1 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Type your messages here..." />
-                <button className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-md border-4 text-white py-1 px-2 rounded" type="button">
-                  <AiOutlineSend />
-                </button>
-              </form>
+        <div className="bg-gradient-to-r rounded-lg from-purple-800 to-blue-700 p-2 h-full">
+          <div className="flex flex-col justify-end rounded-lg bg-white p-2 h-[40rem] w-96">
+            <div className="flex justify-center">chats</div>
+            <div className="flex">
+              <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-3 m-1 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Type your messages here..." />
+              <button className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-md border-4 text-white py-1 px-2 rounded" type="button">
+                <AiOutlineSend />
+              </button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
