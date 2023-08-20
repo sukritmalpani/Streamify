@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useRef} from "react";
 import axios from "axios";
 import { FaPlay, FaPause } from "react-icons/fa";
 import Navbar from "../components/Navbar";
@@ -6,14 +6,64 @@ import Footer from "../components/Footer";
 import { CircularProgress, LinearProgress } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import { useAuthContext } from "../hooks/useAuthContext";
-
+import { io } from "socket.io-client";
 
 export default function Publisher() {
   const [stream, setStream] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
   const [loading, setLoading] = useState(false);
   const [started, setStarted] = useState(false);
-  const { user } = useAuthContext();
+  // const { user } = useAuthContext();
+
+  const [messages, setMesages] = useState([])
+  const inputRef = useRef(null);
+  // const name = useRef(null);
+  const user =  JSON.parse(localStorage.getItem("user"))
+  const name = user?.email.split("@")[0]
+  // const room = useRef(null);
+  const socket = io("http://localhost:5001")
+
+  useEffect(() => {
+
+    return () => {
+      axios.get("http://localhost:3001/chats/64e0f4dd94fe7308aa27db3a").then((result) => {
+        console.log(result.data.chat)
+        let arr = []
+        result.data.chat.map((item) => {
+          arr.push(item)
+        })
+
+        setMesages(arr)
+      })
+      socket.on("connect", () => {
+        console.log("Connected to Socket.io Server")
+      })
+      // socket.disconnect(); 
+
+    };
+
+  }, [])
+
+  socket.on("receive-chat-message", (data) => {
+    setMesages([...messages, data])
+    console.log(data)
+  })
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (name!== ''
+      && name!== null
+      && inputRef.current.value !== '' &&
+      inputRef.current.value !== null) {
+      const newMessage = `${name}:${inputRef.current.value}`
+      socket.emit("send-chat-message", newMessage)
+
+      socket.emit("save-chat", { message: newMessage, id: "64e0f4dd94fe7308aa27db3a" })
+
+      inputRef.current.value = ""
+    }
+  }
+
   async function init() {
     setLoading(true);
     setTimeout(async () => {
@@ -111,7 +161,23 @@ export default function Publisher() {
 
           <div className="bg-gradient-to-r rounded-lg from-purple-800 to-blue-700 p-2 h-full">
             <div className="rounded-lg bg-white p-2 h-[40rem] w-96">
+              {
+                messages.map((item, index) => {
+                  return (
+                    <div key={index} style={{padding:"3px 5px",fontWeight:"600",fontSize:"medium"}}>{item}</div>
+                  )
+                })
+              }
             </div>
+            <form action="" className='send-container' onSubmit={(e) => handleSubmit(e)} >
+              <input
+                type="text"
+                className='message-input'
+                ref={inputRef}
+                style={{margin:"10px 0px",padding:"5px" ,width:"100%"}}
+              />
+              <button type='submit' className='send-button' style={{width:"100%",backgroundColor:"lightgray"}}>Send</button>
+            </form>
           </div>
         </div>
       </div>
