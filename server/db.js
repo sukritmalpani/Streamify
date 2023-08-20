@@ -3,6 +3,7 @@ const mongoURI = process.env.DATABASE_URL;
 
 const mongoDB = async () => {
     try {
+        console.log("hello")
         await mongoose.connect(mongoURI, {
             useNewUrlParser: true,
         })

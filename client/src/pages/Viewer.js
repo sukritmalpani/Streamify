@@ -96,7 +96,6 @@ export default function Viewer() {
       toast.error(data.message);
     }
     if(!(data?.message)){
-      console.log("nv smdn vsn")
       axios.get("http://localhost:3001/chats/64e0f4dd94fe7308aa27db3a").then((result) => {
         console.log(result.data.chat)
         let arr = []
