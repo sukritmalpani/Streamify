@@ -1,9 +1,11 @@
 # Streamify
 
 ### Project Description:
+
 Streamify is an interactive live streaming platform designed to connect content creators, streamers, and viewers in real-time. The platform offers a seamless experience for both broadcasters and viewers, allowing users to share their passions, interact with their audience, and build a community around live streaming content. Whether it's tutorials, events, or any other form of live content, Streamify provides the tools and features to make live streaming engaging and enjoyable.
 
 ### Purpose:
+
 The purpose of Streamify is to provide a platform for individuals, influencers, and businesses to engage with their audience through live streaming. The project aims to facilitate real-time interaction, entertainment, and education, bringing people together through shared interests and live experiences.
 
 ### Key Goals and Objectives:
@@ -153,3 +155,8 @@ Here's a guide on how to use your live streaming website once it's set up:
 - [Sukrit Malpani](https://github.com/sukritmalpani)
 - [Asim Ahmed](https://github.com/mohammedasimahmed)
 - [Harsh Kumar Singh](https://github.com/Harshs0891)
+
+# Demo
+
+- [Streamify](https://streamify-official.vercel.app)
+  `Please note that only frontend of the website has been deployed and hence you will not be able to enjoy the features and faciliies of streaming and chatting.It has been provided only for demo purposes.To enjoy the full benefits our team requests you to install the project following the steps provided above`
