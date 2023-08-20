@@ -50,12 +50,12 @@ export default function Publisher() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      name !== "" &&
-      name !== null &&
+      useRef.current.name !== "" &&
+      useRef.current.name !== null &&
       inputRef.current.value !== "" &&
       inputRef.current.value !== null
     ) {
-      const newMessage = `${name}:${inputRef.current.value}`;
+      const newMessage = `${useRef.current.name}:${inputRef.current.value}`;
       socket.emit("send-chat-message", newMessage);
 
       socket.emit("save-chat", {
@@ -132,7 +132,7 @@ export default function Publisher() {
   return (
     <div>
       <Navbar />
-      <div className="flex  bg-[#44455B] flex-row min-h-screen justify-center items-center h-full">
+      <div className="flex   bg-[#44455B] flex-row min-h-screen justify-center items-center h-full">
         <div className="flex rounded-lg p-5 flex-row min-h-screen min-w-full justify-around items-center h-full">
           <div className=" bg-gradient-to-r m-5 rounded-lg from-purple-800 to-blue-700 p-4 w-10/12 h-full">
             <div className="rounded-lg bg-white p-2">
@@ -168,7 +168,7 @@ export default function Publisher() {
           </div>
 
           <div className="bg-gradient-to-r rounded-lg from-purple-800 to-blue-700 p-2 h-full">
-            <div className="rounded-lg bg-white p-2 h-[40rem] w-96">
+            <div className="rounded-lg bg-white p-2 h-[40rem] w-96 overflow-scroll">
               {messages.map((item, index) => {
                 return (
                   <div
@@ -212,4 +212,4 @@ export default function Publisher() {
       <Footer />
     </div>
   );
-}
+  }
