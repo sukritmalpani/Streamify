@@ -1,4 +1,4 @@
-import React, { useEffect, useState , useRef} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { FaPlay, FaPause } from "react-icons/fa";
 import Navbar from "../components/Navbar";
@@ -7,6 +7,7 @@ import { CircularProgress, LinearProgress } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { io } from "socket.io-client";
+import { AiOutlineSend } from "react-icons/ai";
 
 export default function Publisher() {
   const [stream, setStream] = useState(null);
@@ -15,53 +16,56 @@ export default function Publisher() {
   const [started, setStarted] = useState(false);
   const { user } = useAuthContext();
 
-  const [messages, setMesages] = useState([])
+  const [messages, setMesages] = useState([]);
   const inputRef = useRef(null);
-
-  let name = JSON.parse(localStorage.getItem("user")).name
-
+  // const user =  JSON.parse(localStorage.getItem("user"))
+  // const name = user?.email.split("@")[0]
   const socket = io("http://localhost:5001")
 
   useEffect(() => {
-
     return () => {
-      axios.get("http://localhost:3001/chats/64e0f4dd94fe7308aa27db3a").then((result) => {
-        console.log(result.data.chat)
-        let arr = []
-        result.data.chat.map((item) => {
-          arr.push(item)
-        })
+      axios
+        .get("http://localhost:3001/chats/64e0f4dd94fe7308aa27db3a")
+        .then((result) => {
+          console.log(result.data.chat);
+          let arr = [];
+          result.data.chat.map((item) => {
+            arr.push(item);
+          });
 
-        setMesages(arr)
-      })
+          setMesages(arr);
+        });
       socket.on("connect", () => {
-        console.log("Connected to Socket.io Server")
-      })
-      // socket.disconnect(); 
-
+        console.log("Connected to Socket.io Server");
+      });
+      // socket.disconnect();
     };
-
-  }, [])
+  }, []);
 
   socket.on("receive-chat-message", (data) => {
-    setMesages([...messages, data])
-    console.log(data)
-  })
+    setMesages([...messages, data]);
+    console.log(data);
+  });
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    if (name!== ''
-      && name!== null
-      && inputRef.current.value !== '' &&
-      inputRef.current.value !== null) {
-      const newMessage = `${name}:${inputRef.current.value}`
-      socket.emit("send-chat-message", newMessage)
+    e.preventDefault();
+    if (
+      name !== "" &&
+      name !== null &&
+      inputRef.current.value !== "" &&
+      inputRef.current.value !== null
+    ) {
+      const newMessage = `${name}:${inputRef.current.value}`;
+      socket.emit("send-chat-message", newMessage);
 
-      socket.emit("save-chat", { message: newMessage, id: "64e0f4dd94fe7308aa27db3a" })
+      socket.emit("save-chat", {
+        message: newMessage,
+        id: "64e0f4dd94fe7308aa27db3a",
+      });
 
-      inputRef.current.value = ""
+      inputRef.current.value = "";
     }
-  }
+  };
 
   async function init() {
     setLoading(true);
@@ -74,7 +78,9 @@ export default function Publisher() {
       setStream(mediaStream);
       document.getElementById("video").srcObject = mediaStream;
       const peer = createPeer();
-      mediaStream.getTracks().forEach((track) => peer.addTrack(track, mediaStream));
+      mediaStream
+        .getTracks()
+        .forEach((track) => peer.addTrack(track, mediaStream));
       setLoading(false);
       setStarted(true);
       toast.success("You are live now");
@@ -131,7 +137,12 @@ export default function Publisher() {
           <div className=" bg-gradient-to-r m-5 rounded-lg from-purple-800 to-blue-700 p-4 w-10/12 h-full">
             <div className="rounded-lg bg-white p-2">
               <video className="rounded-lg w-full" autoPlay id="video"></video>
-              {loading && <><LinearProgress /> {started ? "Restarting Your Stream" : "Starting Your Stream"}</>}
+              {loading && (
+                <>
+                  <LinearProgress />{" "}
+                  {started ? "Restarting Your Stream" : "Starting Your Stream"}
+                </>
+              )}
             </div>
             <div className="flex ">
               <button
@@ -143,7 +154,7 @@ export default function Publisher() {
                 <FaPlay />
                 {started ? "Restart" : "Start"}
               </button>
-              {started &&
+              {started && (
                 <button
                   id="pause-button"
                   className="mt-4 h-10 w-32 flex flex-row justify-around items-center ml-15 mr-20 bg-[#F9AB40] hover:bg-[#c0392b] hover:scale-110 duration-300  text-white py-2 px-4 rounded-full"
@@ -152,31 +163,48 @@ export default function Publisher() {
                   {isPaused ? <FaPlay /> : <FaPause />}
                   {isPaused ? "Resume" : "Pause"}
                 </button>
-              }
+              )}
             </div>
           </div>
 
-
-
           <div className="bg-gradient-to-r rounded-lg from-purple-800 to-blue-700 p-2 h-full">
             <div className="rounded-lg bg-white p-2 h-[40rem] w-96">
-              {
-                messages.map((item, index) => {
-                  return (
-                    <div key={index} style={{padding:"3px 5px",fontWeight:"600",fontSize:"medium"}}>{item}</div>
-                  )
-                })
-              }
+              {messages.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    style={{
+                      padding: "3px 5px",
+                      fontWeight: "600",
+                      fontSize: "medium",
+                    }}
+                  >
+                    {item}
+                  </div>
+                );
+              })}
             </div>
-            <form action="" className='send-container' onSubmit={(e) => handleSubmit(e)} >
-              <input
-                type="text"
-                className='message-input'
-                ref={inputRef}
-                style={{margin:"10px 0px",padding:"5px" ,width:"100%"}}
-              />
-              <button type='submit' className='send-button' style={{width:"100%",backgroundColor:"lightgray"}}>Send</button>
-            </form>
+            <div className="flex">
+              <form
+                action=""
+                className="send-container flex justify-center items-center w-full"
+                onSubmit={(e) => handleSubmit(e)}
+              >
+                <input
+                  type="text"
+                  className="message-input appearance-none block h-10 w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-3 m-1 leading-tight focus:outline-none focus:bg-white"
+                  ref={inputRef}
+                  // style={{ margin: "10px 0px", padding: "5px", width: "100%" }}
+                />
+                {/* <button type='submit' className='send-button' style={{width:"100%",backgroundColor:"lightgray"}}>Send</button> */}
+                <button
+                  className="send-button h-10 flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-md border-4 text-white py-1 px-2 rounded"
+                  type="submit"
+                >
+                  <AiOutlineSend />
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
