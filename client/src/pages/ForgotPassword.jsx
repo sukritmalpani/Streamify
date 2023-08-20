@@ -63,7 +63,7 @@ const ForgotPassword = () => {
               </div>
             </form>
             {val && (
-              <>
+              <div className="space-y-5 border-2 p-5 rounded-lg shadow-lg">
                 <h1>Now Enter Your otp and new password</h1>
                 <input
                   type="text"
@@ -88,7 +88,7 @@ const ForgotPassword = () => {
                   {" "}
                   Submit
                 </button>
-              </>
+              </div>
             )}
           </div>
         </div>
