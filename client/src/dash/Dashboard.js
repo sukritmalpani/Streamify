@@ -23,10 +23,10 @@ const Dashboard = () => {
           <h5 className="flex justify-center mt-3 mb-3 text-4xl text-secondary">
             Check Your Streaming Stats
           </h5>
-          <div className="table-responsive min-h-screen w-[1400px] mb-10 flex justify-center p-10 rounded-md">
+          <div className="table-responsive w-[1400px] mb-10 flex justify-center p-10 rounded-md">
             <table className="table table-striped rounded-md">
               <thead className="">
-                <tr className="bg-[#44455B] text-white min-w-screen">
+                <tr className="bg-[#44455B] text-white">
                   <th>No</th>
                   <th>Name</th>
                   <th>Email</th>
@@ -41,8 +41,16 @@ const Dashboard = () => {
                     <td>{output.username}</td>
                     <td>{output.email}</td>
                     <td>{output.link}</td>
-                    <td>{output.website}</td>
-                    <td></td>
+                    <td>
+                      <div class="inline-flex">
+                        <button class="bg-red-300 hover:bg-red-400 text-gray-800 m-1 font-bold py-2 px-4 rounded-md">
+                          Accept
+                        </button>
+                        <button class="bg-green-300 hover:bg-green-400 text-gray-800 m-1 font-bold py-2 px-4 rounded-md">
+                          Reject
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
