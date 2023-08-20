@@ -23,17 +23,6 @@ export default function Publisher() {
 
   useEffect(() => {
     return () => {
-      axios
-        .get("http://localhost:3001/chats/64e0f4dd94fe7308aa27db3a")
-        .then((result) => {
-          console.log(result.data.chat);
-          let arr = [];
-          result.data.chat.map((item) => {
-            arr.push(item);
-          });
-
-          setMesages(arr);
-        });
       socket.on("connect", () => {
         console.log("Connected to Socket.io Server");
       });
