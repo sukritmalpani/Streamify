@@ -10,7 +10,8 @@ const PubReq = require('./models/PubReq')
 const forgotRouter = require("./Routes/forgotPass")
 const { body, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const Admin = require('./models/Admins');
 const secretKey = process.env.SECRET_KEY
 require("./socket")
 const createToken = (_id, isPublisher) => {
@@ -168,5 +169,48 @@ app.get('/getRequest', async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 })
+app.patch('/updatePub', async (req, res) => {
+    try {
+        const { email } = req.body;
+        const updatedUser = await User.findOneAndUpdate(
+            { email },
+            { isPublisher: true },
+            { new: true }
+        );
+
+        res.json(updatedUser);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+app.delete('/deleteReq/:email', async (req, res) => {
+    try {
+        const { email } = req.params;
+        console.log(req.body);
+        const deletedReq = await PubReq.findOneAndDelete({ email });
+        if (!deletedReq) {
+            return res.status(404).json({ message: 'Request already resolved' });
+        }
+
+        res.json(deletedReq);
+    } catch (error) {
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+app.get('/adminCheck/:email', async (req, res) => {
+    try {
+        const { email } = req.params;
+        const user = await Admin.find({ email });
+        console.log(user);
+        if (user === [])
+            res.json({ success: false });
+        else
+            res.json({ success: true });
+    } catch (err) {
+        res.json({ success: false });
+    }
+})
+
 
 app.listen(5000, () => console.log('server started'));
