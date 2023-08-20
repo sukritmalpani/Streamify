@@ -17,8 +17,9 @@ export default function Publisher() {
 
   const [messages, setMesages] = useState([])
   const inputRef = useRef(null);
-  // const user =  JSON.parse(localStorage.getItem("user"))
-  // const name = user?.email.split("@")[0]
+
+  let name = JSON.parse(localStorage.getItem("user")).name
+
   const socket = io("http://localhost:5001")
 
   useEffect(() => {
