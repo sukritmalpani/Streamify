@@ -23,8 +23,6 @@ export default function Publisher() {
 
   useEffect(() => {
     return () => {
-<<<<<<< Updated upstream
-=======
       axios
         .get("http://localhost:3001/chats/64e0f4dd94fe7308aa27db3a")
         .then((result) => {
@@ -36,7 +34,6 @@ export default function Publisher() {
 
           setMesages(arr);
         });
->>>>>>> Stashed changes
       socket.on("connect", () => {
         console.log("Connected to Socket.io Server");
       });
@@ -152,14 +149,8 @@ export default function Publisher() {
   return (
     <div>
       <Navbar />
-<<<<<<< Updated upstream
-      {/* //Parent div  */}
-      <div className="flex flex-wrap  bg-[#44455B] flex-row min-h-screen justify-center items-center h-full">
-        <div className="flex flex-row rounded-lg p-5 min-h-screen min-w-full justify-around items-center h-full">
-=======
       <div className="flex  bg-[#44455B] flex-row min-h-screen justify-center items-center h-full">
         <div className="flex rounded-lg p-5 flex-row min-h-screen min-w-full justify-around items-center h-full">
->>>>>>> Stashed changes
           <div className=" bg-gradient-to-r m-5 rounded-lg from-purple-800 to-blue-700 p-4 w-10/12 h-full">
             <div className="rounded-lg bg-white p-2">
               <video className="rounded-lg w-full" autoPlay id="video"></video>
@@ -197,7 +188,7 @@ export default function Publisher() {
           </div>
 
           <div className="bg-gradient-to-r rounded-lg from-purple-800 to-blue-700 p-2 h-full">
-            <div className="rounded-lg bg-white p-2 h-[40rem] w-96">
+            <div className="rounded-lg bg-white p-2 h-[40rem] w-96 overflow-scroll">
               {messages.map((item, index) => {
                 return (
                   <div
@@ -241,4 +232,4 @@ export default function Publisher() {
       <Footer />
     </div>
   );
-}
+  }
