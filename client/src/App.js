@@ -38,7 +38,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
 {/* >>>>>>> Stashed changes */}
 
-          <Route path="/forgotPass" element={<ForgotPassword />} />
+          {/* <Route path="/forgotPass" element={<ForgotPassword />} /> */}
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
