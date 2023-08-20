@@ -20,8 +20,8 @@ The purpose of Streamify is to provide a platform for individuals, influencers, 
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- [Contributors](#contributors)
+- [Demo](#demo)
 
 ## Features
 
