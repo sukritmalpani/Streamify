@@ -235,9 +235,9 @@ export default function Viewer() {
             <div className="flex" style={{ marginLeft: "10px" }}>chats</div>
             <div className="flex" >
               {/* above is the flex container for the input box and send button */}
-              <form action="" className='send-container flex' onSubmit={(e) => handleSubmit(e)} >
-                <input ref={inputRef} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-3 m-1 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Type your messages here..." />
-                <button className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-md border-4 text-white py-1 px-2 rounded" type="button">
+              <form action="" className='send-container flex justify-center items-center w-full' onSubmit={(e) => handleSubmit(e)} >
+                <input ref={inputRef} className="message-input appearance-none block h-10 w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-3 m-1 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Type your messages here..." />
+                <button className="send-button h-10 flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-md border-4 text-white py-1 px-2 rounded" type="button">
                   <AiOutlineSend />
                 </button>
               </form>
