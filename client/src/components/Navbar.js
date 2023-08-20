@@ -40,7 +40,7 @@ export default function Navbar() {
                 </div>
                 {user && (
                     <>
-                        <span className='font-semibold text-white m-3'>Hello <span className='text-red-700'>{user.name}!</span>  </span>
+                        <span className='font-semibold text-2xl block mx-4 text-white'>Hello <span className='text-red-700'>{user.name}!</span>  </span>
                         <div className="hidden md:inline-block">
                             <button className="block w-auto py-3 px-4 font-medium text-sm text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 active:shadow-none rounded-lg shadow" onClick={handleClick}>
                                 Logout

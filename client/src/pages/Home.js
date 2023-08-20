@@ -192,7 +192,7 @@ export function Home() {
                                     required />
                             </div>
                         </div>
-                        <button onClick={handleSubmit}>Submit</button>
+                        <button className="block w-auto py-3 px-4 font-medium text-sm text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 active:shadow-none rounded-lg shadow" onClick={handleSubmit}>Submit</button>
                     </form >
                 </div >
             </section >
