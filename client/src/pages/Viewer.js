@@ -1,10 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { FaVolumeUp } from "react-icons/fa";
 import { FaPlay, FaPause, FaEye } from "react-icons/fa";
 import { BsArrowsFullscreen } from "react-icons/bs";
 import { AiOutlineSend } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
+import { io } from "socket.io-client";
 
 export default function Viewer() {
   const [paused, setPaused] = useState(false);
@@ -17,6 +18,54 @@ export default function Viewer() {
   const videoRef = useRef(null);
   const audioRef = useRef(null);
   const videoContainerRef = useRef(null);
+
+  const [messages, setMesages] = useState([])
+  const inputRef = useRef(null);
+
+  let name = JSON.parse(localStorage.getItem("user")).name
+
+  const socket = io("http://localhost:5001")
+
+  useEffect(() => {
+
+    return () => {
+      axios.get("http://localhost:3001/chats/64e0f4dd94fe7308aa27db3a").then((result) => {
+        console.log(result.data.chat)
+        let arr = []
+        result.data.chat.map((item) => {
+          arr.push(item)
+        })
+
+        setMesages(arr)
+      })
+      socket.on("connect", () => {
+        console.log("Connected to Socket.io Server")
+      })
+      // socket.disconnect(); 
+
+    };
+
+  }, [])
+
+  socket.on("receive-chat-message", (data) => {
+    setMesages([...messages, data])
+    console.log(data)
+  })
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (name !== ''
+      && name !== null
+      && inputRef.current.value !== '' &&
+      inputRef.current.value !== null) {
+      const newMessage = `${name}:${inputRef.current.value}`
+      socket.emit("send-chat-message", newMessage)
+
+      socket.emit("save-chat", { message: newMessage, id: "64e0f4dd94fe7308aa27db3a" })
+
+      inputRef.current.value = ""
+    }
+  }
 
   async function init() {
     const newPeer = createPeer();
@@ -165,13 +214,30 @@ export default function Viewer() {
         </div>
       </div>
       <div className="bg-gradient-to-r rounded-lg from-purple-800 to-blue-700 p-2 h-full">
-        <div className="flex flex-col justify-end rounded-lg bg-white p-2 h-[40rem] w-96">
-          <div className="flex justify-center">chats</div>
-          <div className="flex">
-            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-3 m-1 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Type your messages here..." />
-            <button className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-md border-4 text-white py-1 px-2 rounded" type="button">
-              <AiOutlineSend />
-            </button>
+        <div className="flex flex-col justify-between rounded-lg bg-white p-2 h-[40rem] w-96">
+          {/* in above div justify-end was changed to justify-between */}
+          <div style={{ height: "34rem", overflowY: "auto" }}>
+            {/* above is the div inside which our chats are displayed */}
+            {
+              messages.map((item, index) => {
+                return (
+                  <div key={index} style={{ padding: "3px 5px", fontWeight: "600", fontSize: "medium" }}>{item}</div>
+                )
+              })
+            }
+          </div>
+          <div >
+            {/* above is the div inside which chats div is there and input field and send button is there  */}
+            <div className="flex" style={{ marginLeft: "10px" }}>chats</div>
+            <div className="flex" > 
+            {/* above is the flex container for the input box and send button */}
+              <form action="" className='send-container flex' onSubmit={(e) => handleSubmit(e)} >
+                <input ref={inputRef} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-3 m-1 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Type your messages here..." />
+                <button className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-md border-4 text-white py-1 px-2 rounded" type="button">
+                  <AiOutlineSend />
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
