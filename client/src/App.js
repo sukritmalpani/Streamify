@@ -18,6 +18,8 @@ import Dashboard from './dash/Dashboard';
 import ForgotPassword from './pages/forgotPassword';
 export default function App() {
   const { user } = useAuthContext();
+  // const user = JSON.parse(localStorage.getItem("user")).name
+  // console.log(user)
   return (
     <div>
       <BrowserRouter>

@@ -11,6 +11,7 @@ const { body, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const secretKey = process.env.SECRET_KEY
+require("./socket")
 const createToken = (_id, isPublisher) => {
     return jwt.sign({ _id, isPublisher }, secretKey, { expiresIn: '3d' })
 }
