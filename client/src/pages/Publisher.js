@@ -18,23 +18,11 @@ export default function Publisher() {
 
   const [messages, setMesages] = useState([]);
   const inputRef = useRef(null);
-  const user1 = JSON.parse(localStorage.getItem("user"))
-  const name = user1?.email.split("@")[0]
+  let name = JSON.parse(localStorage.getItem("user")).name
   const socket = io("http://localhost:5001")
 
   useEffect(() => {
     return () => {
-      axios
-        .get("http://localhost:3001/chats/64e0f4dd94fe7308aa27db3a")
-        .then((result) => {
-          console.log(result.data.chat);
-          let arr = [];
-          result.data.chat.map((item) => {
-            arr.push(item);
-          });
-
-          setMesages(arr);
-        });
       socket.on("connect", () => {
         console.log("Connected to Socket.io Server");
       });
@@ -66,6 +54,24 @@ export default function Publisher() {
       inputRef.current.value = "";
     }
   };
+
+  const handleLiveChats = async()=>{
+    console.log("working")
+
+    const resp = await axios.delete("http://localhost:3001/chats/64e0f4dd94fe7308aa27db3a")
+    console.log(resp)
+
+    axios
+    .get("http://localhost:3001/chats/64e0f4dd94fe7308aa27db3a")
+    .then((result) => {
+      console.log(result.data.chat);
+      let arr = [];
+      result.data.chat.map((item) => {
+        arr.push(item);
+      });
+      setMesages(arr);
+    });
+  }
 
   async function init() {
     setLoading(true);
@@ -149,7 +155,10 @@ export default function Publisher() {
                 disabled={loading}
                 className="mt-4 h-10 w-32 flex flex-row justify-around items-center ml-20 mr-20 bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white py-2 px-4 rounded-full"
                 id="my-button"
-                onClick={init}
+                onClick={()=>{
+                  init();
+                  handleLiveChats();
+                }}
               >
                 <FaPlay />
                 {started ? "Restart" : "Start"}
@@ -168,7 +177,7 @@ export default function Publisher() {
           </div>
 
           <div className="bg-gradient-to-r rounded-lg from-purple-800 to-blue-700 p-2 h-full">
-            <div className="rounded-lg bg-white p-2 h-[40rem] w-96">
+            <div className="rounded-lg bg-white p-2 h-[40rem] w-96" style={{overflowY:"auto"}}>
               {messages.map((item, index) => {
                 return (
                   <div

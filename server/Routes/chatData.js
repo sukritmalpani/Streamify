@@ -33,6 +33,20 @@ router.get("/:chatId",async (req,res)=>{
     }
 })
 
+router.delete("/:chatId", async (req, res) => {
+    try {
+        const chatId = req.params.chatId;
+        console.log("got the id"+chatId)
+        const chatData = await ChatModel.findById(chatId);
+        chatData.chat = []; // Clear the chat messages array
+        await chatData.save(); // Save the changes back to the database
+        res.json(chatData);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "An error occurred" });
+    }
+});
+
 const addChatMessage = async (data) => {
     try {
         const chatData = await ChatModel.findById(data.id)
