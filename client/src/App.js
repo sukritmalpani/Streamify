@@ -11,9 +11,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home';
 import { Navigate } from 'react-router-dom';
 
+
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuthContext } from './hooks/useAuthContext';
 import Dashboard from './dash/Dashboard';
+import ForgotPassword from './pages/forgotPassword';
 export default function App() {
   const { user } = useAuthContext();
   return (
