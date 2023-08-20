@@ -51,7 +51,6 @@ The purpose of Streamify is to provide a platform for individuals, influencers, 
    - **React Router:** For managing navigation and routing within the application.
    - **Material-UI:** A UI component library for creating modern and responsive user interfaces.
    - **Axios:** A promise-based HTTP client for making API requests.
-   - **Socket.IO:** For real-time communication and chat functionality.
    - **react-icons:** Library for adding icons to components.
    - **react-toastify:** For displaying toast notifications.
 
@@ -61,7 +60,6 @@ The purpose of Streamify is to provide a platform for individuals, influencers, 
    - **Express:** A lightweight web application framework for Node.js.
    - **MongoDB:** A NoSQL database for storing user data, chats, and more.
    - **Mongoose:** An Object Data Modeling (ODM) library for MongoDB.
-   - **Socket.IO:** For real-time communication and chat functionality.
    - **jsonwebtoken:** For handling user authentication and authorization.
    - **bcryptjs:** For hashing and securing user passwords.
    - **cors:** Middleware for enabling CORS in the Express app.
@@ -70,11 +68,15 @@ The purpose of Streamify is to provide a platform for individuals, influencers, 
 
    - **wrtc:** A WebRTC implementation for Node.js, enabling real-time audio and video streaming.
 
-4. **Deployment and Hosting:**
+4. **Socket.io (Real-Time Bidirectional Communication ):**
+   
+   - **socket.io:**  a JavaScript library that enables real-time, bidirectional communication between web clients (such as browsers) and servers allowing              features like live chat to be made with this technology
+
+5. **Deployment and Hosting:**
 
    - **Vercel:** For deploying the frontend of the application.
 
-5. **Other Tools and Technologies:**
+6. **Other Tools and Technologies:**
 
    - **Git:** For version control and collaboration.
    - **GitHub:** For hosting and managing the project repository.
