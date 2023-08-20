@@ -113,7 +113,7 @@ export default function Viewer() {
   return (
     <div className="flex  bg-[#44455B] min-h-screen flex-row justify-around items-center h-full ">
       <ToastContainer />
-      <div className=" bg-gradient-to-r m-5 rounded-lg from-purple-800 to-blue-400 p-4 w-6/12 h-full">
+      <div className=" bg-gradient-to-r m-5 rounded-lg from-purple-800 to-blue-400 p-4 w-10/12 h-full">
         <div className="rounded-lg bg-white p-2" ref={videoContainerRef}>
           <video
             ref={videoRef}
