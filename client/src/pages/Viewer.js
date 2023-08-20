@@ -6,6 +6,7 @@ import { BsArrowsFullscreen } from "react-icons/bs";
 import { AiOutlineSend } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import { io } from "socket.io-client";
+import Navbar from "../components/Navbar";
 
 export default function Viewer() {
   const [paused, setPaused] = useState(false);
@@ -164,6 +165,8 @@ export default function Viewer() {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="flex  bg-[#44455B] min-h-screen flex-row justify-around items-center h-full ">
       <ToastContainer />
       <div className=" bg-gradient-to-r m-5 rounded-lg from-purple-800 to-blue-400 p-4 w-10/12 h-full">
@@ -246,5 +249,6 @@ export default function Viewer() {
         </div>
       </div>
     </div>
+    </>
   );
 }
