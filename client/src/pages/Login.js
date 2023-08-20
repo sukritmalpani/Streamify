@@ -68,7 +68,7 @@ export default function Login(props) {
                             Sign in
                         </button>
                         <div className="text-center">
-                            <Link to="#" className="hover:text-indigo-600">Forgot password?</Link>
+                            <Link to="/forgotPass" className="hover:text-indigo-600">Forgot password?</Link>
                         </div>
                         {error && <div className="text-center">{error}</div>}
                     </form>

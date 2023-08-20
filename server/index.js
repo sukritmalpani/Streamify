@@ -6,6 +6,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const webrtc = require("wrtc");
 const User = require('./models/Users')
+const forgotRouter = require("./Routes/forgotPass")
 const { body, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
@@ -19,6 +20,8 @@ app.use(cors());
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use("/",forgotRouter)
 app.post("/consumer", async ({ body }, res) => {
     try {
         const peer = new webrtc.RTCPeerConnection({
