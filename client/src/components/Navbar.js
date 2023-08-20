@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react'
 import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
+import logo from "../images/logo.png"
 
 export default function Navbar() {
     const [state, setState] = useState(false)
@@ -19,7 +20,7 @@ export default function Navbar() {
             <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
                 <div className="flex items-center justify-between py-3 md:py-5 md:block">
                     <img
-                        src="https://www.floatui.com/logo.svg"
+                        src={logo}
                         width={120}
                         height={50}
                         alt="Float UI logo"
