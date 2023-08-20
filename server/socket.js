@@ -17,8 +17,8 @@ app.use(express.json())
 app.use("/chats",chatRouter)
 
 io.on("connection",(socket)=>{
-    console.log("User connected")
-    console.log(socket.id)
+    // console.log("User connected")
+    // console.log(socket.id)
     socket.on("send-chat-message",(data)=>{
             socket.broadcast.emit("receive-chat-message",data)
     })

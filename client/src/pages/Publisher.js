@@ -27,7 +27,7 @@ export default function Publisher() {
       axios
         .get("http://localhost:3001/chats/64e0f4dd94fe7308aa27db3a")
         .then((result) => {
-          console.log(result.data.chat);
+          // console.log(result.data.chat);
           let arr = [];
           result.data.chat.map((item) => {
             arr.push(item);
@@ -44,7 +44,7 @@ export default function Publisher() {
 
   socket.on("receive-chat-message", (data) => {
     setMesages([...messages, data]);
-    console.log(data);
+    // console.log(data);
   });
 
   const handleSubmit = (e) => {
