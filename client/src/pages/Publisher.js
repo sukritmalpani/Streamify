@@ -55,22 +55,22 @@ export default function Publisher() {
     }
   };
 
-  const handleLiveChats = async()=>{
+  const handleLiveChats = async () => {
     console.log("working")
 
     const resp = await axios.delete("http://localhost:3001/chats/64e0f4dd94fe7308aa27db3a")
     console.log(resp)
 
     axios
-    .get("http://localhost:3001/chats/64e0f4dd94fe7308aa27db3a")
-    .then((result) => {
-      console.log(result.data.chat);
-      let arr = [];
-      result.data.chat.map((item) => {
-        arr.push(item);
+      .get("http://localhost:3001/chats/64e0f4dd94fe7308aa27db3a")
+      .then((result) => {
+        console.log(result.data.chat);
+        let arr = [];
+        result.data.chat.map((item) => {
+          arr.push(item);
+        });
+        setMesages(arr);
       });
-      setMesages(arr);
-    });
   }
 
   async function init() {
@@ -138,7 +138,7 @@ export default function Publisher() {
   return (
     <div>
       <Navbar />
-      <div className="flex  bg-[#44455B] flex-row min-h-screen justify-center items-center h-full">
+      <div className="flex   bg-[#44455B] flex-row min-h-screen justify-center items-center h-full">
         <div className="flex rounded-lg p-5 flex-row min-h-screen min-w-full justify-around items-center h-full">
           <div className=" bg-gradient-to-r m-5 rounded-lg from-purple-800 to-blue-700 p-4 w-10/12 h-full">
             <div className="rounded-lg bg-white p-2">
@@ -155,7 +155,7 @@ export default function Publisher() {
                 disabled={loading}
                 className="mt-4 h-10 w-32 flex flex-row justify-around items-center ml-20 mr-20 bg-[#16a085] hover:bg-[#27ae60] hover:scale-110 duration-300 text-white py-2 px-4 rounded-full"
                 id="my-button"
-                onClick={()=>{
+                onClick={() => {
                   init();
                   handleLiveChats();
                 }}
@@ -221,4 +221,4 @@ export default function Publisher() {
       <Footer />
     </div>
   );
-  }
+}

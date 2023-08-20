@@ -72,17 +72,10 @@ const Dashboard = () => {
                     <td>{output.link}</td>
                     <td>
                       <div class="inline-flex">
-{/* <<<<<<< Updated upstream */}
-                        {/* <button className="bg-red-300 hover:bg-red-400 text-gray-800 m-1 font-bold py-2 px-4 rounded-md" onClick={() => handleClick1(output.email)}>
-                          Accept
-                        </button> */}
-                        {/* <button className="bg-green-300 hover:bg-green-400 text-gray-800 m-1 font-bold py-2 px-4 rounded-md" onClick={() => handleClick2(output.email)}> */}
-{/* ======= */}
-                        <button className="bg-red-300 hover:bg-red-400 text-gray-800 m-1 font-bold py-2 px-4 rounded-md">
+                        <button class="bg-red-300 hover:bg-red-400 text-gray-800 m-1 font-bold py-2 px-4 rounded-md">
                           Accept
                         </button>
-                        <button className="bg-green-300 hover:bg-green-400 text-gray-800 m-1 font-bold py-2 px-4 rounded-md">
-{/* >>>>>>> Stashed changes */}
+                        <button class="bg-green-300 hover:bg-green-400 text-gray-800 m-1 font-bold py-2 px-4 rounded-md">
                           Reject
                         </button>
                       </div>

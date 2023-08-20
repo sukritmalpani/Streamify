@@ -42,7 +42,7 @@ app.post("/consumer", async ({ body }, res) => {
         const payload = {
             sdp: peer.localDescription
         }
-        console.log("OK");
+        console.log(payload);
         if (payload == null)
             res.json({ message: "Currently there are no Live Streams" })
         res.json(payload);

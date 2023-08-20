@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import { Footer } from 'flowbite-react';
 import { useAuth } from '../utils/AuthContext';
 import { useLogin } from '../hooks/useLogin';
+import logo from '../images/logo.png'
 export default function Login(props) {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const { login, error, isLoading } = useLogin();
@@ -24,7 +25,7 @@ export default function Login(props) {
                 {message && <span>{message}</span>}
                 <div className="max-w-sm w-full text-gray-600">
                     <div className="text-center">
-                        <img src="https://floatui.com/logo.svg" width={150} className="mx-auto" />
+                        <img src={logo} width={150} className="mx-auto rounded-lg shadow-lg shadow-slate-500" />
                         <div className="mt-5 space-y-2">
                             <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">Log in to your account</h3>
                             <p className="">Don't have an account? <Link to="/register" className="font-medium text-indigo-600 hover:text-indigo-500">Sign up</Link></p>
