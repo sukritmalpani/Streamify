@@ -13,14 +13,12 @@ export default function Publisher() {
   const [isPaused, setIsPaused] = useState(false);
   const [loading, setLoading] = useState(false);
   const [started, setStarted] = useState(false);
-  // const { user } = useAuthContext();
+  const { user } = useAuthContext();
 
   const [messages, setMesages] = useState([])
   const inputRef = useRef(null);
-  // const name = useRef(null);
-  const user =  JSON.parse(localStorage.getItem("user"))
-  const name = user?.email.split("@")[0]
-  // const room = useRef(null);
+  // const user =  JSON.parse(localStorage.getItem("user"))
+  // const name = user?.email.split("@")[0]
   const socket = io("http://localhost:5001")
 
   useEffect(() => {

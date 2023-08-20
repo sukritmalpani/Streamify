@@ -17,9 +17,9 @@ import { useAuthContext } from './hooks/useAuthContext';
 import Dashboard from './dash/Dashboard';
 import ForgotPassword from './pages/forgotPassword';
 export default function App() {
-  // const { user } = useAuthContext();
-  const user = JSON.parse(localStorage.getItem("user")).name
-  console.log(user)
+  const { user } = useAuthContext();
+  // const user = JSON.parse(localStorage.getItem("user")).name
+  // console.log(user)
   return (
     <div>
       <BrowserRouter>
@@ -28,7 +28,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/dash" element={<Dashboard />} />
 
-          {/* <Route path='/publisher' element={user?.publisher ? <Publisher /> : <Login message="You need to login first" />} /> */}
+          <Route path='/publisher' element={user?.publisher ? <Publisher /> : <Login message="You need to login first" />} />
           <Route path="/viewer" element={user ? <Viewer /> : <Login message="You need to login first" />} />
           <Route path="/login" element={user ? <Navigate to='/' /> : <Login />} />
           <Route path="/register" element={user ? <Navigate to='/' /> : <Register />} />
