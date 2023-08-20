@@ -50,12 +50,12 @@ export default function Publisher() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      useRef.current.name !== "" &&
-      useRef.current.name !== null &&
+      name !== "" &&
+      name !== null &&
       inputRef.current.value !== "" &&
       inputRef.current.value !== null
     ) {
-      const newMessage = `${useRef.current.name}:${inputRef.current.value}`;
+      const newMessage = `${name}:${inputRef.current.value}`;
       socket.emit("send-chat-message", newMessage);
 
       socket.emit("save-chat", {
