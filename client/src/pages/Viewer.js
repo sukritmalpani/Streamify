@@ -220,7 +220,7 @@ export default function Viewer() {
       <div className="bg-gradient-to-r rounded-lg from-purple-800 to-blue-700 p-2 h-full">
         <div className="flex flex-col justify-between rounded-lg bg-white p-2 h-[40rem] w-96">
           {/* in above div justify-end was changed to justify-between */}
-          <div style={{ height: "34rem", overflowY: "auto" }}>
+          <div className="overflow-scroll" style={{ height: "34rem", overflowY: "auto" }}>
             {/* above is the div inside which our chats are displayed */}
             {
               messages.map((item, index) => {
@@ -232,7 +232,7 @@ export default function Viewer() {
           </div>
           <div >
             {/* above is the div inside which chats div is there and input field and send button is there  */}
-            <div className="flex overflow-scroll" style={{ marginLeft: "10px" }}>chats</div>
+            {/* <div className="flex overflow-scroll" style={{ marginLeft: "10px" }}>chats</div> */}
             <div className="flex" >
               {/* above is the flex container for the input box and send button */}
               <form action="" className='send-container flex justify-center items-center w-full' onSubmit={(e) => handleSubmit(e)} >
