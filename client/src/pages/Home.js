@@ -28,10 +28,14 @@ export function Home() {
         });
     }
     const handleSubmit = async (e) => {
+        e.preventDefault();
         const userData = localStorage.getItem("user");
+        if (!userData) {
+            toast.error("You need to login first");
+            return;
+        }
         const user = JSON.parse(userData)
         const { email } = user;
-        e.preventDefault();
         if (formData.username == "" || formData.link == "" || formData.email == "") {
             toast.error("All Fields are required");
             return;
