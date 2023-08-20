@@ -11,8 +11,8 @@ router.post("/otp",(req,res)=>{
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'iit2022031@iiitl.ac.in',
-          pass: 'iiitl@1264'
+          user: 'youremail@gmail.com',
+          pass: '****'
         }
       });
       
