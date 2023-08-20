@@ -10,12 +10,10 @@ import Page404 from './pages/Page404';
 import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home';
 import { Navigate } from 'react-router-dom';
-
-
+import ForgotPassword from './pages/ForgotPassword';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuthContext } from './hooks/useAuthContext';
 import Dashboard from './dash/Dashboard';
-import ForgotPassword from './pages/forgotPassword';
 export default function App() {
   const { user } = useAuthContext();
   // const user = JSON.parse(localStorage.getItem("user")).name
@@ -24,7 +22,6 @@ export default function App() {
     <div>
       <BrowserRouter>
         <Routes>
-{/* <<<<<<< Updated upstream */}
           <Route path="/" element={<Home />} />
           <Route path="/dash" element={<Dashboard />} />
 
@@ -32,13 +29,6 @@ export default function App() {
           <Route path="/viewer" element={user ? <Viewer /> : <Login message="You need to login first" />} />
           <Route path="/login" element={user ? <Navigate to='/' /> : <Login />} />
           <Route path="/register" element={user ? <Navigate to='/' /> : <Register />} />
-=======
-          <Route path="/test" element={<Home />} />
-          <Route path='/publisher' element={<Publisher />} />
-          <Route path="/viewer" element={<Viewer />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-{/* >>>>>>> Stashed changes */}
 
           <Route path="/forgotPass" element={<ForgotPassword />} />
           <Route path="*" element={<Page404 />} />

@@ -6,6 +6,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const webrtc = require("wrtc");
 const User = require('./models/Users')
+const PubReq = require('./models/PubReq')
 const forgotRouter = require("./Routes/forgotPass")
 const { body, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
@@ -22,7 +23,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use("/",forgotRouter)
+app.use("/", forgotRouter)
 app.post("/consumer", async ({ body }, res) => {
     try {
         const peer = new webrtc.RTCPeerConnection({
@@ -41,6 +42,8 @@ app.post("/consumer", async ({ body }, res) => {
             sdp: peer.localDescription
         }
         console.log("OK");
+        if (payload == null)
+            res.json({ message: "Currently there are no Live Streams" })
         res.json(payload);
     } catch (err) {
         res.json({ message: "Currently there are no Live Streams" })
@@ -134,6 +137,36 @@ app.post('/loginuser', [
         res.status(400).json({ success: false })
     }
 })
+app.post('/pubrequest', async (req, res) => {
+    try {
+        const user = await User.findOne({ email: req.body.email });
+        const requ = await PubReq.findOne({ email: req.body.email });
+        if (user.isPublisher) {
+            res.json({ success: false, message: "You are already a publisher!" });
+        }
+        else if (requ) {
+            res.status(200).json({ success: false, message: "You already have a request!" });
+        }
+        else {
+            const request = await PubReq.create({
+                username: req.body.username,
+                link: req.body.link,
+                email: req.body.email
+            });
 
+            res.status(200).json({ success: true, message: "Request sent successfully" });
+        }
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+app.get('/getRequest', async (req, res) => {
+    try {
+        const allRequests = await PubReq.find();
+        res.status(200).json(allRequests);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+})
 
 app.listen(5000, () => console.log('server started'));

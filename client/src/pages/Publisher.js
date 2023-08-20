@@ -18,8 +18,8 @@ export default function Publisher() {
 
   const [messages, setMesages] = useState([]);
   const inputRef = useRef(null);
-  // const user =  JSON.parse(localStorage.getItem("user"))
-  // const name = user?.email.split("@")[0]
+  const user1 = JSON.parse(localStorage.getItem("user"))
+  const name = user1?.email.split("@")[0]
   const socket = io("http://localhost:5001")
 
   useEffect(() => {
@@ -194,7 +194,7 @@ export default function Publisher() {
                   type="text"
                   className="message-input appearance-none block h-10 w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-3 m-1 leading-tight focus:outline-none focus:bg-white"
                   ref={inputRef}
-                  // style={{ margin: "10px 0px", padding: "5px", width: "100%" }}
+                // style={{ margin: "10px 0px", padding: "5px", width: "100%" }}
                 />
                 {/* <button type='submit' className='send-button' style={{width:"100%",backgroundColor:"lightgray"}}>Send</button> */}
                 <button
