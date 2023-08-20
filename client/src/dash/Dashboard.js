@@ -23,20 +23,20 @@ const Dashboard = () => {
         <h5 className="flex justify-center mt-3 mb-3 text-4xl text-secondary">
           Check Your Streaming Stats
         </h5>
-        <div className="table-responsive h-9/12 w-[1200px] mb-10 flex justify-center p-10 rounded-md">
-          <table className="table table-striped rounded-md  border">
-            <thead className="thead-light">
-              <tr className="bg-[#44455B] text-white ml-10">
+        <div className="table-responsive min-h-screen w-[1400px] mb-10 flex justify-center p-10 rounded-md">
+          <table className="table table-striped rounded-md">
+            <thead className="">
+              <tr className="bg-[#44455B] text-white min-w-screen">
                 <th>No</th>
-                <th>Label</th>
-                <th>Header</th>
-                <th>Column</th>
-                <th>Record Data</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Social Media</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
               {record.slice(0, 5).map((output) => (
-                <tr key={output.id}>
+                <tr key={output.id} className="">
                   <td>{output.id}</td>
                   <td>{output.name}</td>
                   <td>{output.email}</td>
