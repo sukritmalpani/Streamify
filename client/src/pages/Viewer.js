@@ -232,7 +232,7 @@ export default function Viewer() {
           </div>
           <div >
             {/* above is the div inside which chats div is there and input field and send button is there  */}
-            <div className="flex" style={{ marginLeft: "10px" }}>chats</div>
+            <div className="flex overflow-scroll" style={{ marginLeft: "10px" }}>chats</div>
             <div className="flex" >
               {/* above is the flex container for the input box and send button */}
               <form action="" className='send-container flex justify-center items-center w-full' onSubmit={(e) => handleSubmit(e)} >
