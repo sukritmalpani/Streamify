@@ -17,7 +17,7 @@ router.post("/otp",(req,res)=>{
       });
       
       var mailOptions = {
-        from: 'iit2022031@gmail.com',
+        from: 'youremail@gmail.com',
         to: req.body.email,
         subject: 'OTP to reset your password',
         text: otp
